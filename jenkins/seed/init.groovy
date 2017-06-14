@@ -9,14 +9,25 @@ import hudson.plugins.groovy.*
 def jobScript = new File('/usr/share/jenkins/jenkins_pipeline.groovy')
 def jobManagement = new JenkinsJobManagement(System.out, [:], new File('.'))
 
+File mavenRepoIdFile = new File('/usr/share/jenkins/mavenRepoId')
+File mavenRepoUserFile = new File('/usr/share/jenkins/mavenRepoUser')
+File mavenRepoPassFile = new File('/usr/share/jenkins/mavenRepoPass')
+String mavenRepoId = mavenRepoIdFile?.text ?: "artifactory-local"
+String mavenRepoUser = mavenRepoUserFile?.text ?: "admin"
+String mavenRepoPass = mavenRepoPassFile?.text ?: "password"
+
 println "Creating the settings.xml file"
 String m2Home = '/var/jenkins_home/.m2'
 boolean m2Created = new File(m2Home).mkdirs()
 if (m2Created) {
 	boolean settingsCreated = new File("${m2Home}/settings.xml").createNewFile()
 	if (settingsCreated) {
-		new File("${m2Home}/settings.xml").text =
-				new File('/usr/share/jenkins/settings.xml').text
+		String settingsText = new File('/usr/share/jenkins/settings.xml').text
+		settingsText = settingsText
+				.replace('${M2_SETTINGS_REPO_ID}', mavenRepoId)
+				.replace('${M2_SETTINGS_REPO_USERNAME}', mavenRepoUser)
+				.replace('${M2_SETTINGS_REPO_PASSWORD}', mavenRepoPass)
+		new File("${m2Home}/settings.xml").text = settingsText
 	} else {
 		println "Failed to create settings.xml!"
 	}
@@ -30,14 +41,21 @@ boolean gradleCreated = new File(gradleHome).mkdirs()
 if (gradleCreated) {
 	boolean settingsCreated = new File("${gradleHome}/gradle.properties").createNewFile()
 	if (settingsCreated) {
-		new File("${gradleHome}/gradle.properties").text =
-				new File('/usr/share/jenkins/gradle.properties').text
+		String settingsText = new File('/usr/share/jenkins/gradle.properties').text
+		settingsText = settingsText
+				.replace('${M2_SETTINGS_REPO_USERNAME}', mavenRepoUser)
+				.replace('${M2_SETTINGS_REPO_PASSWORD}', mavenRepoPass)
+		new File("${gradleHome}/gradle.properties").text = settingsText
 	}  else {
 		println "Failed to create gradle.properties!"
 	}
 }  else {
 	println "Failed to create .gradle folder!"
 }
+
+mavenRepoIdFile?.delete()
+mavenRepoUserFile?.delete()
+mavenRepoPassFile?.delete()
 
 println "Creating the seed job"
 new DslScriptLoader(jobManagement).with {
@@ -90,8 +108,10 @@ if (publicKey.exists()) {
 	println "Public key file does not exist in " + publicKey.getPath()
 }
 
-String gitUser = new File('/usr/share/jenkins/gituser')?.text ?: "changeme"
-String gitPass = new File('/usr/share/jenkins/gitpass')?.text ?: "changeme"
+File gitUserFile = new File('/usr/share/jenkins/gituser')
+File gitPassFile = new File('/usr/share/jenkins/gitpass')
+String gitUser = gitUserFile?.text ?: "changeme"
+String gitPass = gitPassFile?.text ?: "changeme"
 
 boolean gitCredsMissing = SystemCredentialsProvider.getInstance().getCredentials().findAll {
 	it.getDescriptor().getId() == 'git'
@@ -104,6 +124,9 @@ if (gitCredsMissing) {
 					"GIT credential", gitUser, gitPass))
 	SystemCredentialsProvider.getInstance().save()
 }
+
+gitUserFile?.delete()
+gitPassFile?.delete()
 
 println "Adding jdk"
 Jenkins.getInstance().getJDKs().add(new JDK("jdk8", "/usr/lib/jvm/java-8-openjdk-amd64"))

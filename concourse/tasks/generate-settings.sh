@@ -31,8 +31,8 @@ echo "Writing gradle.properties to [${GRADLE_USER_HOME}/gradle.properties]"
 
 cat > ${GRADLE_USER_HOME}/gradle.properties <<EOF
 
-repoUsername=${M2_SETTINGS_REPO_USERNAME}
-repoPassword=${M2_SETTINGS_REPO_PASSWORD}
+M2_SETTINGS_REPO_USERNAME=${M2_SETTINGS_REPO_USERNAME}
+M2_SETTINGS_REPO_PASSWORD=${M2_SETTINGS_REPO_PASSWORD}
 
 EOF
 echo "gradle.properties written"

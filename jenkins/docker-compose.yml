@@ -6,6 +6,9 @@ services:
       args:
         gituser: "${PIPELINE_GIT_USERNAME}"
         gitpass: "${PIPELINE_GIT_PASSWORD}"
+        mavenRepoId: "${M2_SETTINGS_REPO_ID}"
+        mavenRepoUser: "${M2_SETTINGS_REPO_USERNAME}"
+        mavenRepoPass: "${M2_SETTINGS_REPO_PASSWORD}"
     environment:
       FORKED_ORG: "${FORKED_ORG}"
       EXTERNAL_IP: "${EXTERNAL_IP}"

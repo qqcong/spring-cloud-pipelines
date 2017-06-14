@@ -6,6 +6,9 @@
 FROM jenkins:2.19.1
 ARG gituser=changeme
 ARG gitpass=changeme
+ARG mavenRepoId=artifactory-local
+ARG mavenRepoUser=admin
+ARG mavenRepoPass=password
 
 MAINTAINER Marcin Grzejszczak <mgrzejszczak@pivotal.io>
 
@@ -21,6 +24,11 @@ USER root
 # files there
 RUN printf "%s" "${gituser}" > /usr/share/jenkins/gituser
 RUN printf "%s" "${gitpass}" > /usr/share/jenkins/gitpass
+
+# Passing repo id / user & pass for settings
+RUN printf "%s" "${mavenRepoId}" > /usr/share/jenkins/mavenRepoId
+RUN printf "%s" "${mavenRepoUser}" > /usr/share/jenkins/mavenRepoUser
+RUN printf "%s" "${mavenRepoPass}" > /usr/share/jenkins/mavenRepoPass
 
 USER root
 
