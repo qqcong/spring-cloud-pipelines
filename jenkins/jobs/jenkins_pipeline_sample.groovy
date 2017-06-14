@@ -1,13 +1,6 @@
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.helpers.BuildParametersContext
 
-/*
-	TODO: TO develop
-	- write bash tests
-	- perform blue green deployment
-	- implement the complete step
-*/
-
 DslFactory dsl = this
 
 // These will be taken either from seed or global variables
@@ -733,6 +726,7 @@ return envs'''
 			stringParam('STUBRUNNER_ARTIFACT_ID', 'github-analytics-stub-runner-boot', "Artifact Id for Stub Runner used by tests")
 			stringParam('STUBRUNNER_VERSION', '0.0.1.M1', "Artifact Version for Stub Runner used by tests")
 			booleanParam('STUBRUNNER_USE_CLASSPATH', false, "Should Stub Runner use classpath instead of reaching a repo")
+			stringParam('BUILD_OPTIONS', null, "Additional build options to be passed to the build tool")
 		}
 	}
 
