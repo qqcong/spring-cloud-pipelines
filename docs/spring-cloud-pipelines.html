@@ -542,6 +542,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_how_to_work_with_jenkins_job_dsl_plugin">How to work with Jenkins Job DSL plugin</a></li>
 </ul>
 </li>
+<li><a href="#_the_demo_setup">The demo setup</a>
+<ul class="sectlevel2">
+<li><a href="#_running_prometheus_on_cf">Running Prometheus on CF</a></li>
+<li><a href="#_running_grafana_on_cf">Running Grafana on CF</a></li>
+</ul>
+</li>
 <li><a href="#_how_to_build_it_2">How to build it</a>
 <ul class="sectlevel2">
 <li><a href="#_build_and_test">Build and test</a></li>
@@ -1555,59 +1561,59 @@ Docker Machine IP.</p>
 </thead>
 <tfoot>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JAVA_BUILDPACK_URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the Java buildpack to be used by CF</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/cloudfoundry/java-buildpack.git#v3.8.1" class="bare">https://github.com/cloudfoundry/java-buildpack.git#v3.8.1</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BUILD_OPTIONS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional options you would like to pass to the Maven / Gradle build</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tfoot>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_TEST_API_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_TEST_API_URL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the CF Api for TEST env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">api.local.pcfdev.io</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_STAGE_API_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_STAGE_API_URL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the CF Api for STAGE env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">api.local.pcfdev.io</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_PROD_API_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_PROD_API_URL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the CF Api for PROD env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">api.local.pcfdev.io</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_TEST_ORG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_TEST_ORG</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the org for the test env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-org</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_TEST_SPACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_TEST_SPACE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the space for the test env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-space</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_STAGE_ORG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_STAGE_ORG</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the org for the stage env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-org</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_STAGE_SPACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_STAGE_SPACE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the space for the stage env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-space</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_PROD_ORG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_PROD_ORG</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the org for the prod env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-org</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_PROD_SPACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_PROD_SPACE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the space for the prod env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-space</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_WITH_BINARIES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_WITH_JARS</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">URL to repo with the deployed jars</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://192.168.99.100:8081/artifactory/libs-release-local" class="bare">http://192.168.99.100:8081/artifactory/libs-release-local</a></p></td>
 </tr>
@@ -1617,7 +1623,7 @@ Docker Machine IP.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">artifactory-local</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PASS_HOSTNAME_UUID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_HOSTNAME_UUID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Additional suffix for the route. In a shared environment the default routes can be already taken</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -1625,6 +1631,11 @@ Docker Machine IP.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">APP_MEMORY_LIMIT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">How much memory should be used by the infra apps (Eureka, Stub Runner etc.)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">256m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JAVA_BUILDPACK_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the Java buildpack to be used by CF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/cloudfoundry/java-buildpack.git#v3.8.1" class="bare">https://github.com/cloudfoundry/java-buildpack.git#v3.8.1</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -2625,7 +2636,7 @@ of Java installation and the others to another one.
 </div>
 </div>
 <div class="paragraph">
-<p>In the screenshot we could parametrize the <code>REPOS</code> and <code>REPO_WITH_BINARIES</code> params.</p>
+<p>In the screenshot we could parametrize the <code>REPOS</code> and <code>REPO_WITH_JARS</code> params.</p>
 </div>
 </div>
 <div class="sect4">
@@ -2675,59 +2686,59 @@ This section is presented only for informational purposes - for the sake of demo
 </thead>
 <tfoot>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JAVA_BUILDPACK_URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the Java buildpack to be used by CF</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/cloudfoundry/java-buildpack.git#v3.8.1" class="bare">https://github.com/cloudfoundry/java-buildpack.git#v3.8.1</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BUILD_OPTIONS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional options you would like to pass to the Maven / Gradle build</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tfoot>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_TEST_API_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_TEST_API_URL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the CF Api for TEST env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">api.local.pcfdev.io</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_STAGE_API_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_STAGE_API_URL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the CF Api for STAGE env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">api.local.pcfdev.io</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_PROD_API_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_PROD_API_URL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the CF Api for PROD env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">api.local.pcfdev.io</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_TEST_ORG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_TEST_ORG</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the org for the test env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-org</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_TEST_SPACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_TEST_SPACE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the space for the test env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-space</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_STAGE_ORG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_STAGE_ORG</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the org for the stage env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-org</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_STAGE_SPACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_STAGE_SPACE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the space for the stage env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-space</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_PROD_ORG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_PROD_ORG</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the org for the prod env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-org</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_PROD_SPACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_PROD_SPACE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the space for the prod env</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pcfdev-space</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_WITH_BINARIES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_WITH_JARS</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">URL to repo with the deployed jars</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://artifactory:8081/artifactory/libs-release-local" class="bare">http://artifactory:8081/artifactory/libs-release-local</a></p></td>
 </tr>
@@ -2757,7 +2768,7 @@ This section is presented only for informational purposes - for the sake of demo
 <td class="tableblock halign-left valign-top"><p class="tableblock">Pivo Tal</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PASS_HOSTNAME_UUID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_HOSTNAME_UUID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Additional suffix for the route. In a shared environment the default routes can be already taken</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -2785,6 +2796,11 @@ This section is presented only for informational purposes - for the sake of demo
 <td class="tableblock halign-left valign-top"><p class="tableblock">APP_MEMORY_LIMIT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">How much memory should be used by the infra apps (Eureka, Stub Runner etc.)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">256m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JAVA_BUILDPACK_URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The URL to the Java buildpack to be used by CF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/cloudfoundry/java-buildpack.git#v3.8.1" class="bare">https://github.com/cloudfoundry/java-buildpack.git#v3.8.1</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -2856,7 +2872,7 @@ This section is presented only for informational purposes - for the sake of demo
 </thead>
 <tfoot>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_PROD_CREDENTIAL_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_PROD_CREDENTIAL_ID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Credential ID for CF Prod env access</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">cf-prod</p></td>
 </tr>
@@ -2868,12 +2884,17 @@ This section is presented only for informational purposes - for the sake of demo
 <td class="tableblock halign-left valign-top"><p class="tableblock">git</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_TEST_CREDENTIAL_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_WITH_JARS_CREDENTIALS_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Credential ID used for the repo with jars</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo-with-jars</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_TEST_CREDENTIAL_ID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Credential ID for CF Test env access</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">cf-test</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PAAS_STAGE_CREDENTIAL_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF_STAGE_CREDENTIAL_ID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Credential ID for CF Stage env access</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">cf-stage</p></td>
 </tr>
@@ -3413,6 +3434,128 @@ Remember that views can be overridden that&#8217;s why the suggestion is to cont
 </td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_demo_setup">The demo setup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/spring-cloud-samples/github-webhook/">Github webhook code</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/spring-cloud-samples/github-analytics/">Github analytics code</a></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/demo/demo.png" alt="demo">
+</div>
+<div class="title">The overview of the demo: Github Webhook listens to HTTP calls and sends a message to Github Analytics</div>
+</div>
+<div class="paragraph">
+<p>&#160;
+&#160;</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/demo/demo_metrics.png" alt="demo metrics">
+</div>
+<div class="title">Gathering metrics: Github Analytics exposes metrics that are polled by Prometheus</div>
+</div>
+<div class="paragraph">
+<p>&#160;
+&#160;</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/demo/demo_alerting.png" alt="demo alerting">
+</div>
+<div class="title">Alerting over metrics: Grafana alerts Slack over Prometheus metrics</div>
+</div>
+<div class="paragraph">
+<p>&#160;
+&#160;</p>
+</div>
+<div class="sect2">
+<h3 id="_running_prometheus_on_cf">Running Prometheus on CF</h3>
+<div class="paragraph">
+<p>Go to <a href="https://prometheus.io/download/" class="bare">https://prometheus.io/download/</a> and download linux binary. Then call:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>cf push sc-pipelines-prometheus -b binary_buildpack -c './prometheus -web.listen-address=:8080' -m 64m</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also <code>localhost:9090</code> in <code>prometheus.yml</code> should be <code>localhost:8080</code>.</p>
+</div>
+<div class="paragraph">
+<p>The file should look like this to work with the demo setup (change <code>github-analytics-sc-pipelines-demo.cfapps.io</code>
+to your <code>github-analytics</code> installation).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yml" data-lang="yml"># my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'codelab-monitor'
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first.rules"
+  # - "second.rules"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['localhost:8080']
+
+  - job_name: 'demo-app'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    metrics_path: '/prometheus'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['github-analytics-sc-pipelines-demo.cfapps.io']</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A deployed version for the Spring Cloud Pipelines demo is available <a href="https://sc-pipelines-prometheus.cfapps.io/">here</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_running_grafana_on_cf">Running Grafana on CF</h3>
+<div class="paragraph">
+<p>Download tarball from <a href="https://grafana.com/grafana/download?platform=linux" class="bare">https://grafana.com/grafana/download?platform=linux</a>
+Next set <code>http_port = 8080</code> in <code>conf/default.ini</code>. Then call</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>cf push sc-pipelines-grafana -b binary_buildpack -c './bin/grafana-server web' -m 64m</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The demo is using Grafana Dashboard with ID <code>2471</code>.</p>
+</div>
+<div class="paragraph">
+<p>A deployed version for the Spring Cloud Pipelines demo is available <a href="https://sc-pipelines-grafana.cfapps.io/">here</a></p>
 </div>
 </div>
 </div>
