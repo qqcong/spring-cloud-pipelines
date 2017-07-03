@@ -45,6 +45,9 @@ function testDeploy() {
     # Log in to PaaS to start deployment
     logInToPaas
 
+    # First delete the app instance to remove all bindings
+    deleteAppInstance "${appName}"
+
     # TODO: Consider picking services and apps from file
     # services
     export UNIQUE_RABBIT_NAME="rabbitmq-${appName}"
@@ -62,7 +65,6 @@ function testDeploy() {
     deployService "STUBRUNNER" "${UNIQUE_STUBRUNNER_NAME}"
 
     # deploy app
-    deleteAppInstance "${appName}"
     downloadAppBinary 'true' ${REPO_WITH_BINARIES} ${projectGroupId} ${appName} ${PIPELINE_VERSION}
     deployAndRestartAppWithNameForSmokeTests ${appName} "${appName}-${PIPELINE_VERSION}" "${UNIQUE_RABBIT_NAME}" "${UNIQUE_EUREKA_NAME}" "${UNIQUE_MYSQL_NAME}"
     propagatePropertiesForTests ${appName}
@@ -132,7 +134,7 @@ function deployRabbitMq() {
         (cf cs cloudamqp lemur "${serviceName}" && echo "Started RabbitMQ") ||
         (cf cs p-rabbitmq standard "${serviceName}" && echo "Started RabbitMQ for PCF Dev")
     else
-        echo "Service [${foundName}] already started"
+        echo "Service [${foundApp}] already started"
     fi
 }
 

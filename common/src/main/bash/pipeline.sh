@@ -15,12 +15,6 @@ function apiCompatibilityCheck() {
 
 # ---- TEST PHASE ----
 
-# TODO: Move to pipeline-cf
-function logInToPaas() {
-    echo "To interact with a platform you have to often first log in there"
-    exit 1
-}
-
 function testDeploy() {
     echo "Deploy binaries and required services to test environment"
     exit 1
@@ -38,11 +32,6 @@ function prepareForSmokeTests() {
 
 function runSmokeTests() {
     echo "Executes smoke tests "
-    exit 1
-}
-
-function deployService() {
-    echo "Uploads / starts a service of given type and name"
     exit 1
 }
 
@@ -77,37 +66,6 @@ function deleteBlueInstance() {
 }
 
 # ---- COMMON ----
-
-function retrieveAppName() {
-    echo "Retrieves the name of the application from the source code"
-    exit 1
-}
-
-function deployAndRestartAppWithName() {
-    echo "Deploys an application with a given name"
-    exit 1
-}
-
-function deployAndRestartAppWithNameForSmokeTests() {
-    echo "Deploys an application with a given name for Smoke tests"
-    exit 1
-}
-
-function deleteAppInstance() {
-    echo "Deletes a deployed application"
-    exit 1
-}
-
-function downloadAppBinary() {
-    echo "Downloads a binary with a built and tested application"
-    exit 1
-}
-
-# TODO: Consider removing this
-function propagatePropertiesForTests() {
-    echo "Any properties needed by "
-    exit 1
-}
 
 function projectType() {
     echo "Returns the type of the project basing on the cloned sources.
