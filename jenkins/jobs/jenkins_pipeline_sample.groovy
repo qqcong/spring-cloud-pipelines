@@ -97,10 +97,10 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash 
-		${WORKSPACE}@tools/common/src/main/bash/build_and_upload.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/build_and_upload.sh
 		''')
 		}
 		publishers {
@@ -161,10 +161,10 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
-		${WORKSPACE}@tools/common/src/main/bash/build_api_compatibility_check.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/build_api_compatibility_check.sh
 		''')
 		}
 		publishers {
@@ -213,10 +213,10 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
-		${WORKSPACE}@tools/common/src/main/bash/test_deploy.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/test_deploy.sh
 		''')
 		}
 		publishers {
@@ -267,10 +267,10 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
-		${WORKSPACE}@tools/common/src/main/bash/test_smoke.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/test_smoke.sh
 		''')
 		}
 		publishers {
@@ -330,10 +330,10 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 				shell('''#!/bin/bash
-		${WORKSPACE}@tools/common/src/main/bash/test_rollback_deploy.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/test_rollback_deploy.sh
 		''')
 			}
 			publishers {
@@ -387,10 +387,10 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 				shell('''#!/bin/bash
-		${WORKSPACE}@tools/common/src/main/bash/test_rollback_smoke.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/test_rollback_smoke.sh
 		''')
 			}
 			publishers {
@@ -469,10 +469,10 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 				shell('''#!/bin/bash
-		${WORKSPACE}@tools/common/src/main/bash/stage_deploy.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/stage_deploy.sh
 		''')
 			}
 			publishers {
@@ -532,10 +532,10 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 				shell('''#!/bin/bash
-		${WORKSPACE}@tools/common/src/main/bash/stage_e2e.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/stage_e2e.sh
 		''')
 			}
 			publishers {
@@ -601,10 +601,10 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
-		${WORKSPACE}@tools/common/src/main/bash/prod_deploy.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/prod_deploy.sh
 		''')
 		}
 		publishers {
@@ -658,10 +658,10 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
-		${WORKSPACE}@tools/common/src/main/bash/prod_complete.sh
+		${WORKSPACE}/.git/tools/common/src/main/bash/prod_complete.sh
 		''')
 		}
 	}
