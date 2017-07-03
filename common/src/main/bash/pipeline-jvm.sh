@@ -5,20 +5,20 @@ set -e
 export MAVEN_OPTS="${MAVEN_OPTS} -Djava.security.egd=file:///dev/urandom"
 
 function build() {
-    echo "Additional Maven Args [${MAVEN_ARGS}]"
+    echo "Additional Built Options [${BUILD_OPTIONS}]"
 
     if [[ "${PROJECT_TYPE}" == "MAVEN" ]]; then
-        ./mvnw versions:set -DnewVersion=${PIPELINE_VERSION} ${MAVEN_ARGS}
+        ./mvnw versions:set -DnewVersion=${PIPELINE_VERSION} ${BUILD_OPTIONS}
         if [[ "${CI}" == "CONCOURSE" ]]; then
-            ./mvnw clean verify deploy -Ddistribution.management.release.id=${M2_SETTINGS_REPO_ID} -Ddistribution.management.release.url=${REPO_WITH_BINARIES} ${MAVEN_ARGS} || ( $( printTestResults ) && return 1)
+            ./mvnw clean verify deploy -Ddistribution.management.release.id=${M2_SETTINGS_REPO_ID} -Ddistribution.management.release.url=${REPO_WITH_BINARIES} ${BUILD_OPTIONS} || ( $( printTestResults ) && return 1)
         else
-            ./mvnw clean verify deploy -Ddistribution.management.release.id=${M2_SETTINGS_REPO_ID} -Ddistribution.management.release.url=${REPO_WITH_BINARIES} ${MAVEN_ARGS}
+            ./mvnw clean verify deploy -Ddistribution.management.release.id=${M2_SETTINGS_REPO_ID} -Ddistribution.management.release.url=${REPO_WITH_BINARIES} ${BUILD_OPTIONS}
         fi
     elif [[ "${PROJECT_TYPE}" == "GRADLE" ]]; then
         if [[ "${CI}" == "CONCOURSE" ]]; then
-            ./gradlew clean build deploy -PnewVersion=${PIPELINE_VERSION} -DREPO_WITH_BINARIES=${REPO_WITH_BINARIES} --stacktrace  || ( $( printTestResults ) && return 1)
+            ./gradlew clean build deploy -PnewVersion=${PIPELINE_VERSION} -DREPO_WITH_BINARIES=${REPO_WITH_BINARIES} --stacktrace ${BUILD_OPTIONS} || ( $( printTestResults ) && return 1)
         else
-            ./gradlew clean build deploy -PnewVersion=${PIPELINE_VERSION} -DREPO_WITH_BINARIES=${REPO_WITH_BINARIES} --stacktrace
+            ./gradlew clean build deploy -PnewVersion=${PIPELINE_VERSION} -DREPO_WITH_BINARIES=${REPO_WITH_BINARIES} --stacktrace ${BUILD_OPTIONS}
         fi
     else
         echo "Unsupported project build tool"
@@ -40,18 +40,18 @@ function apiCompatibilityCheck() {
         # Downloading latest jar
         LATEST_PROD_VERSION=${LATEST_PROD_TAG#prod/}
         echo "Last prod version equals ${LATEST_PROD_VERSION}"
-        echo "Additional Maven Args [${MAVEN_ARGS}]"
+        echo "Additional Built Options [${BUILD_OPTIONS}]"
         if [[ "${PROJECT_TYPE}" == "MAVEN" ]]; then
             if [[ "${CI}" == "CONCOURSE" ]]; then
-                ./mvnw clean verify -Papicompatibility -Dlatest.production.version=${LATEST_PROD_VERSION} -Drepo.with.jars=${REPO_WITH_BINARIES} ${MAVEN_ARGS} || ( $( printTestResults ) && return 1)
+                ./mvnw clean verify -Papicompatibility -Dlatest.production.version=${LATEST_PROD_VERSION} -Drepo.with.jars=${REPO_WITH_BINARIES} ${BUILD_OPTIONS} || ( $( printTestResults ) && return 1)
             else
-                ./mvnw clean verify -Papicompatibility -Dlatest.production.version=${LATEST_PROD_VERSION} -Drepo.with.jars=${REPO_WITH_BINARIES} ${MAVEN_ARGS}
+                ./mvnw clean verify -Papicompatibility -Dlatest.production.version=${LATEST_PROD_VERSION} -Drepo.with.jars=${REPO_WITH_BINARIES} ${BUILD_OPTIONS}
             fi
         elif [[ "${PROJECT_TYPE}" == "GRADLE" ]]; then
             if [[ "${CI}" == "CONCOURSE" ]]; then
-                ./gradlew clean apiCompatibility -DlatestProductionVersion=${LATEST_PROD_VERSION} -DREPO_WITH_BINARIES=${REPO_WITH_BINARIES} --stacktrace  || ( $( printTestResults ) && return 1)
+                ./gradlew clean apiCompatibility -DlatestProductionVersion=${LATEST_PROD_VERSION} -DREPO_WITH_BINARIES=${REPO_WITH_BINARIES} --stacktrace ${BUILD_OPTIONS} || ( $( printTestResults ) && return 1)
             else
-                ./gradlew clean apiCompatibility -DlatestProductionVersion=${LATEST_PROD_VERSION} -DREPO_WITH_BINARIES=${REPO_WITH_BINARIES} --stacktrace
+                ./gradlew clean apiCompatibility -DlatestProductionVersion=${LATEST_PROD_VERSION} -DREPO_WITH_BINARIES=${REPO_WITH_BINARIES} --stacktrace ${BUILD_OPTIONS}
             fi
         else
             echo "Unsupported project build tool"
@@ -64,7 +64,7 @@ function apiCompatibilityCheck() {
 # and change this function
 function extractMavenProperty() {
     local prop="${1}"
-    MAVEN_PROPERTY=$(./mvnw ${MAVEN_ARGS} -q \
+    MAVEN_PROPERTY=$(./mvnw ${BUILD_OPTIONS} -q \
                     -Dexec.executable="echo" \
                     -Dexec.args="\${${prop}}" \
                     --non-recursive \
@@ -103,7 +103,7 @@ function retrieveGroupId() {
         result=$( echo "${result}" | tail -1 )
         echo "${result}"
     else
-        local result=$( ruby -r rexml/document -e 'puts REXML::Document.new(File.new(ARGV.shift)).elements["/project/groupId"].text' pom.xml || ./mvnw ${MAVEN_ARGS} org.apache.maven.plugins:maven-help-plugin:2.2:evaluate -Dexpression=project.groupId |grep -Ev '(^\[|Download\w+:)' )
+        local result=$( ruby -r rexml/document -e 'puts REXML::Document.new(File.new(ARGV.shift)).elements["/project/groupId"].text' pom.xml || ./mvnw ${BUILD_OPTIONS} org.apache.maven.plugins:maven-help-plugin:2.2:evaluate -Dexpression=project.groupId |grep -Ev '(^\[|Download\w+:)' )
         result=$( echo "${result}" | tail -1 )
         echo "${result}"
     fi
@@ -115,7 +115,7 @@ function retrieveAppName() {
         result=$( echo "${result}" | tail -1 )
         echo "${result}"
     else
-        local result=$( ruby -r rexml/document -e 'puts REXML::Document.new(File.new(ARGV.shift)).elements["/project/artifactId"].text' pom.xml || ./mvnw ${MAVEN_ARGS} org.apache.maven.plugins:maven-help-plugin:2.2:evaluate -Dexpression=project.artifactId |grep -Ev '(^\[|Download\w+:)' )
+        local result=$( ruby -r rexml/document -e 'puts REXML::Document.new(File.new(ARGV.shift)).elements["/project/artifactId"].text' pom.xml || ./mvnw ${BUILD_OPTIONS} org.apache.maven.plugins:maven-help-plugin:2.2:evaluate -Dexpression=project.artifactId |grep -Ev '(^\[|Download\w+:)' )
         result=$( echo "${result}" | tail -1 )
         echo "${result}"
     fi
@@ -140,9 +140,9 @@ function runSmokeTests() {
 
     if [[ "${PROJECT_TYPE}" == "MAVEN" ]]; then
         if [[ "${CI}" == "CONCOURSE" ]]; then
-            ./mvnw clean install -Psmoke -Dapplication.url="${applicationHost}" -Dstubrunner.url="${stubrunnerHost}" ${MAVEN_ARGS} || ( echo "$( printTestResults )" && return 1)
+            ./mvnw clean install -Psmoke -Dapplication.url="${applicationHost}" -Dstubrunner.url="${stubrunnerHost}" ${BUILD_OPTIONS} || ( echo "$( printTestResults )" && return 1)
         else
-            ./mvnw clean install -Psmoke -Dapplication.url="${applicationHost}" -Dstubrunner.url="${stubrunnerHost}" ${MAVEN_ARGS}
+            ./mvnw clean install -Psmoke -Dapplication.url="${applicationHost}" -Dstubrunner.url="${stubrunnerHost}" ${BUILD_OPTIONS}
         fi
     elif [[ "${PROJECT_TYPE}" == "GRADLE" ]]; then
         if [[ "${CI}" == "CONCOURSE" ]]; then

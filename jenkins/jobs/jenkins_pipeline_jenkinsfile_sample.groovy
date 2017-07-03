@@ -26,6 +26,7 @@ envs['PAAS_PROD_ORG'] = binding.variables['PAAS_PROD_ORG'] ?: 'pcfdev-org'
 envs['PAAS_PROD_SPACE'] = binding.variables['PAAS_PROD_SPACE'] ?: 'pfcdev-prod'
 envs['PASS_HOSTNAME_UUID'] = binding.variables['PASS_HOSTNAME_UUID'] ?: ''
 envs['M2_SETTINGS_REPO_ID'] = binding.variables['M2_SETTINGS_REPO_ID'] ?: 'artifactory-local'
+envs['REPO_WITH_BINARIES_CREDENTIALS_ID'] = binding.variables['REPO_WITH_BINARIES_CREDENTIALS_ID'] ?: 'repo-with-jars'
 envs['REPO_WITH_BINARIES'] = binding.variables['REPO_WITH_BINARIES'] ?: 'http://artifactory:8081/artifactory/libs-release-local'
 envs['GIT_CREDENTIAL_ID'] = gitCredentials 
 envs['JDK_VERSION'] = binding.variables["JDK_VERSION"] ?: "jdk8"

@@ -1,13 +1,6 @@
 import javaposse.jobdsl.dsl.DslFactory
 import javaposse.jobdsl.dsl.helpers.BuildParametersContext
 
-/*
-	TODO: TO develop
-	- write bash tests
-	- perform blue green deployment
-	- implement the complete step
-*/
-
 DslFactory dsl = this
 
 // These will be taken either from seed or global variables
@@ -18,6 +11,7 @@ String pipelineVersion = binding.variables["PIPELINE_VERSION"] ?: '''1.0.0.M1-${
 String cronValue = "H H * * 7" //every Sunday - I guess you should run it more often ;)
 String testReports = ["**/surefire-reports/*.xml", "**/test-results/**/*.xml"].join(",")
 String gitCredentials = binding.variables["GIT_CREDENTIAL_ID"] ?: "git"
+String repoWithJarsCredentials = binding.variables["REPO_WITH_BINARIES_CREDENTIALS_ID"] ?: "repo-with-jars"
 String jdkVersion = binding.variables["JDK_VERSION"] ?: "jdk8"
 String cfTestCredentialId = binding.variables["PAAS_TEST_CREDENTIAL_ID"] ?: "cf-test"
 String cfStageCredentialId = binding.variables["PAAS_STAGE_CREDENTIAL_ID"] ?: "cf-stage"
@@ -72,6 +66,9 @@ parsedRepos.each {
 				noActivity(300)
 				failBuild()
 				writeDescription('Build failed due to timeout after {0} minutes of inactivity')
+			}
+			credentialsBinding {
+				usernamePassword('M2_SETTINGS_REPO_USERNAME', 'M2_SETTINGS_REPO_PASSWORD', repoWithJarsCredentials)
 			}
 		}
 		jdk(jdkVersion)
@@ -223,7 +220,7 @@ parsedRepos.each {
 			downstreamParameterized {
 				trigger("${projectName}-test-env-test") {
 					parameters {
-						propertiesFile('${OUTPUT_FOLDER}/test.properties', true)
+						propertiesFile('target/test.properties,build/libs/test.properties', false)
 						currentBuild()
 					}
 					triggerWithNoParameters()
@@ -341,7 +338,7 @@ parsedRepos.each {
 					trigger("${projectName}-test-env-rollback-test") {
 						triggerWithNoParameters()
 						parameters {
-							propertiesFile('${OUTPUT_FOLDER}/test.properties', false)
+							propertiesFile('target/test.properties,build/libs/test.properties', false)
 							currentBuild()
 						}
 					}
@@ -482,7 +479,7 @@ parsedRepos.each {
 							triggerWithNoParameters()
 							parameters {
 								currentBuild()
-								propertiesFile('${OUTPUT_FOLDER}/test.properties', true)
+								propertiesFile('target/test.properties,build/libs/test.properties', false)
 							}
 						}
 					}
@@ -490,7 +487,7 @@ parsedRepos.each {
 					buildPipelineTrigger("${projectName}-stage-env-test") {
 						parameters {
 							currentBuild()
-							propertiesFile('${OUTPUT_FOLDER}/test.properties', true)
+							propertiesFile('target/test.properties,build/libs/test.properties', false)
 						}
 					}
 				}
