@@ -94,7 +94,7 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash 
 		${WORKSPACE}/.git/tools/common/src/main/bash/build_and_upload.sh
@@ -158,7 +158,7 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
 		${WORKSPACE}/.git/tools/common/src/main/bash/build_api_compatibility_check.sh
@@ -210,7 +210,7 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
 		${WORKSPACE}/.git/tools/common/src/main/bash/test_deploy.sh
@@ -264,7 +264,7 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
 		${WORKSPACE}/.git/tools/common/src/main/bash/test_smoke.sh
@@ -327,7 +327,7 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 				shell('''#!/bin/bash
 		${WORKSPACE}/.git/tools/common/src/main/bash/test_rollback_deploy.sh
@@ -384,7 +384,7 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 				shell('''#!/bin/bash
 		${WORKSPACE}/.git/tools/common/src/main/bash/test_rollback_smoke.sh
@@ -466,7 +466,7 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 				shell('''#!/bin/bash
 		${WORKSPACE}/.git/tools/common/src/main/bash/stage_deploy.sh
@@ -529,7 +529,7 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 				shell('''#!/bin/bash
 		${WORKSPACE}/.git/tools/common/src/main/bash/stage_e2e.sh
@@ -598,7 +598,7 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
 		${WORKSPACE}/.git/tools/common/src/main/bash/prod_deploy.sh
@@ -655,7 +655,7 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
+		rm -rf .git/tools && git clone -b ${toolsBranch} --single-branch ${toolsRepo} .git/tools 
 		""")
 			shell('''#!/bin/bash
 		${WORKSPACE}/.git/tools/common/src/main/bash/prod_complete.sh
