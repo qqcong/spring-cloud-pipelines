@@ -67,7 +67,7 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
       - put: repo
@@ -106,7 +106,7 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
 
@@ -140,14 +140,14 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
-          - CF_TEST_USERNAME: {{cf-test-username}}
-          - CF_TEST_PASSWORD: {{cf-test-password}}
-          - CF_TEST_ORG: {{cf-test-org}}
-          - CF_TEST_SPACE: {{cf-test-space}}
-          - CF_TEST_API_URL: {{cf-test-api-url}}
-          - CF_HOSTNAME_UUID: {{cf-hostname-uuid}}
+          - PAAS_TEST_USERNAME: {{cf-test-username}}
+          - PAAS_TEST_PASSWORD: {{cf-test-password}}
+          - PAAS_TEST_ORG: {{cf-test-org}}
+          - PAAS_TEST_SPACE: {{cf-test-space}}
+          - PAAS_TEST_API_URL: {{cf-test-api-url}}
+          - PASS_HOSTNAME_UUID: {{cf-hostname-uuid}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
 
   - name: test-smoke
@@ -180,13 +180,13 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
-          - CF_TEST_USERNAME: {{cf-test-username}}
-          - CF_TEST_PASSWORD: {{cf-test-password}}
-          - CF_TEST_ORG: {{cf-test-org}}
-          - CF_TEST_SPACE: {{cf-test-space}}
-          - CF_TEST_API_URL: {{cf-test-api-url}}
+          - PAAS_TEST_USERNAME: {{cf-test-username}}
+          - PAAS_TEST_PASSWORD: {{cf-test-password}}
+          - PAAS_TEST_ORG: {{cf-test-org}}
+          - PAAS_TEST_SPACE: {{cf-test-space}}
+          - PAAS_TEST_API_URL: {{cf-test-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
 
   - name: test-rollback-deploy
@@ -219,13 +219,13 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
-          - CF_TEST_USERNAME: {{cf-test-username}}
-          - CF_TEST_PASSWORD: {{cf-test-password}}
-          - CF_TEST_ORG: {{cf-test-org}}
-          - CF_TEST_SPACE: {{cf-test-space}}
-          - CF_TEST_API_URL: {{cf-test-api-url}}
+          - PAAS_TEST_USERNAME: {{cf-test-username}}
+          - PAAS_TEST_PASSWORD: {{cf-test-password}}
+          - PAAS_TEST_ORG: {{cf-test-org}}
+          - PAAS_TEST_SPACE: {{cf-test-space}}
+          - PAAS_TEST_API_URL: {{cf-test-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
 
   - name: test-rollback-smoke
@@ -258,13 +258,13 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
-          - CF_TEST_USERNAME: {{cf-test-username}}
-          - CF_TEST_PASSWORD: {{cf-test-password}}
-          - CF_TEST_ORG: {{cf-test-org}}
-          - CF_TEST_SPACE: {{cf-test-space}}
-          - CF_TEST_API_URL: {{cf-test-api-url}}
+          - PAAS_TEST_USERNAME: {{cf-test-username}}
+          - PAAS_TEST_PASSWORD: {{cf-test-password}}
+          - PAAS_TEST_ORG: {{cf-test-org}}
+          - PAAS_TEST_SPACE: {{cf-test-space}}
+          - PAAS_TEST_API_URL: {{cf-test-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
 
   - name: stage-deploy
@@ -297,14 +297,14 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
           - CF_STAGE_USERNAME: {{cf-stage-username}}
           - CF_STAGE_PASSWORD: {{cf-stage-password}}
-          - CF_STAGE_ORG: {{cf-stage-org}}
-          - CF_STAGE_SPACE: {{cf-stage-space}}
-          - CF_STAGE_API_URL: {{cf-stage-api-url}}
-          - CF_HOSTNAME_UUID: {{cf-hostname-uuid}}
+          - PAAS_STAGE_ORG: {{cf-stage-org}}
+          - PAAS_STAGE_SPACE: {{cf-stage-space}}
+          - PAAS_STAGE_API_URL: {{cf-stage-api-url}}
+          - PASS_HOSTNAME_UUID: {{cf-hostname-uuid}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
 
   - name: stage-e2e
@@ -337,13 +337,13 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
           - CF_STAGE_USERNAME: {{cf-stage-username}}
           - CF_STAGE_PASSWORD: {{cf-stage-password}}
-          - CF_STAGE_ORG: {{cf-stage-org}}
-          - CF_STAGE_SPACE: {{cf-stage-space}}
-          - CF_STAGE_API_URL: {{cf-stage-api-url}}
+          - PAAS_STAGE_ORG: {{cf-stage-org}}
+          - PAAS_STAGE_SPACE: {{cf-stage-space}}
+          - PAAS_STAGE_API_URL: {{cf-stage-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
 
   - name: prod-deploy
@@ -376,14 +376,14 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
           - CF_PROD_USERNAME: {{cf-prod-username}}
           - CF_PROD_PASSWORD: {{cf-prod-password}}
-          - CF_PROD_ORG: {{cf-prod-org}}
-          - CF_PROD_SPACE: {{cf-prod-space}}
-          - CF_PROD_API_URL: {{cf-prod-api-url}}
-          - CF_HOSTNAME_UUID: {{cf-hostname-uuid}}
+          - PAAS_PROD_ORG: {{cf-prod-org}}
+          - PAAS_PROD_SPACE: {{cf-prod-space}}
+          - PAAS_PROD_API_URL: {{cf-prod-api-url}}
+          - PASS_HOSTNAME_UUID: {{cf-hostname-uuid}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
       - put: repo
         params:
@@ -421,11 +421,11 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_JARS: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-jars}}
           - M2_REPO: {{maven-local-dir}}
           - CF_PROD_USERNAME: {{cf-prod-username}}
           - CF_PROD_PASSWORD: {{cf-prod-password}}
-          - CF_PROD_ORG: {{cf-prod-org}}
-          - CF_PROD_SPACE: {{cf-prod-space}}
-          - CF_PROD_API_URL: {{cf-prod-api-url}}
+          - PAAS_PROD_ORG: {{cf-prod-org}}
+          - PAAS_PROD_SPACE: {{cf-prod-space}}
+          - PAAS_PROD_API_URL: {{cf-prod-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}

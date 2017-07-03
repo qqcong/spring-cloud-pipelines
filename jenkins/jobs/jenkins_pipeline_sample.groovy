@@ -19,9 +19,9 @@ String cronValue = "H H * * 7" //every Sunday - I guess you should run it more o
 String testReports = ["**/surefire-reports/*.xml", "**/test-results/**/*.xml"].join(",")
 String gitCredentials = binding.variables["GIT_CREDENTIAL_ID"] ?: "git"
 String jdkVersion = binding.variables["JDK_VERSION"] ?: "jdk8"
-String cfTestCredentialId = binding.variables["CF_TEST_CREDENTIAL_ID"] ?: "cf-test"
-String cfStageCredentialId = binding.variables["CF_STAGE_CREDENTIAL_ID"] ?: "cf-stage"
-String cfProdCredentialId = binding.variables["CF_PROD_CREDENTIAL_ID"] ?: "cf-prod"
+String cfTestCredentialId = binding.variables["PAAS_TEST_CREDENTIAL_ID"] ?: "cf-test"
+String cfStageCredentialId = binding.variables["PAAS_STAGE_CREDENTIAL_ID"] ?: "cf-stage"
+String cfProdCredentialId = binding.variables["PAAS_PROD_CREDENTIAL_ID"] ?: "cf-prod"
 String gitEmail = binding.variables["GIT_EMAIL"] ?: "pivo@tal.com"
 String gitName = binding.variables["GIT_NAME"] ?: "Pivo Tal"
 boolean autoStage = binding.variables["AUTO_DEPLOY_TO_STAGE"] == null ? false : Boolean.parseBoolean(binding.variables["AUTO_DEPLOY_TO_STAGE"])
@@ -189,7 +189,7 @@ parsedRepos.each {
 				groovy(PipelineDefaults.groovyEnvScript)
 			}
 			credentialsBinding {
-				usernamePassword('CF_TEST_USERNAME', 'CF_TEST_PASSWORD', cfTestCredentialId)
+				usernamePassword('PAAS_TEST_USERNAME', 'PAAS_TEST_PASSWORD', cfTestCredentialId)
 			}
 			timestamps()
 			colorizeOutput()
@@ -240,7 +240,7 @@ parsedRepos.each {
 				groovy(PipelineDefaults.groovyEnvScript)
 			}
 			credentialsBinding {
-				usernamePassword('CF_TEST_USERNAME', 'CF_TEST_PASSWORD', cfTestCredentialId)
+				usernamePassword('PAAS_TEST_USERNAME', 'PAAS_TEST_PASSWORD', cfTestCredentialId)
 			}
 			timestamps()
 			colorizeOutput()
@@ -306,7 +306,7 @@ parsedRepos.each {
 					groovy(PipelineDefaults.groovyEnvScript)
 				}
 				credentialsBinding {
-					usernamePassword('CF_TEST_USERNAME', 'CF_TEST_PASSWORD', cfTestCredentialId)
+					usernamePassword('PAAS_TEST_USERNAME', 'PAAS_TEST_PASSWORD', cfTestCredentialId)
 				}
 				timeout {
 					noActivity(300)
@@ -357,7 +357,7 @@ parsedRepos.each {
 					groovy(PipelineDefaults.groovyEnvScript)
 				}
 				credentialsBinding {
-					usernamePassword('CF_TEST_USERNAME', 'CF_TEST_PASSWORD', cfTestCredentialId)
+					usernamePassword('PAAS_TEST_USERNAME', 'PAAS_TEST_PASSWORD', cfTestCredentialId)
 				}
 				parameters {
 					stringParam('LATEST_PROD_TAG', 'master', 'Latest production tag. If "master" is picked then the step will be ignored')
@@ -680,18 +680,18 @@ class PipelineDefaults {
 
 	private Map<String, String> defaultEnvVars(Map<String, String> variables) {
 		Map<String, String> envs = [:]
-		envs['CF_TEST_API_URL'] = variables['CF_TEST_API_URL'] ?: 'api.local.pcfdev.io'
-		envs['CF_STAGE_API_URL'] = variables['CF_STAGE_API_URL'] ?: 'api.local.pcfdev.io'
-		envs['CF_PROD_API_URL'] = variables['CF_PROD_API_URL'] ?: 'api.local.pcfdev.io'
-		envs['CF_TEST_ORG'] = variables['CF_TEST_ORG'] ?: 'pcfdev-org'
-		envs['CF_TEST_SPACE'] = variables['CF_TEST_SPACE'] ?: 'pfcdev-test'
-		envs['CF_STAGE_ORG'] = variables['CF_STAGE_ORG'] ?: 'pcfdev-org'
-		envs['CF_STAGE_SPACE'] = variables['CF_STAGE_SPACE'] ?: 'pfcdev-stage'
-		envs['CF_PROD_ORG'] = variables['CF_PROD_ORG'] ?: 'pcfdev-org'
-		envs['CF_PROD_SPACE'] = variables['CF_PROD_SPACE'] ?: 'pfcdev-prod'
-		envs['CF_HOSTNAME_UUID'] = variables['CF_HOSTNAME_UUID'] ?: ''
+		envs['PAAS_TEST_API_URL'] = variables['PAAS_TEST_API_URL'] ?: 'api.local.pcfdev.io'
+		envs['PAAS_STAGE_API_URL'] = variables['PAAS_STAGE_API_URL'] ?: 'api.local.pcfdev.io'
+		envs['PAAS_PROD_API_URL'] = variables['PAAS_PROD_API_URL'] ?: 'api.local.pcfdev.io'
+		envs['PAAS_TEST_ORG'] = variables['PAAS_TEST_ORG'] ?: 'pcfdev-org'
+		envs['PAAS_TEST_SPACE'] = variables['PAAS_TEST_SPACE'] ?: 'pfcdev-test'
+		envs['PAAS_STAGE_ORG'] = variables['PAAS_STAGE_ORG'] ?: 'pcfdev-org'
+		envs['PAAS_STAGE_SPACE'] = variables['PAAS_STAGE_SPACE'] ?: 'pfcdev-stage'
+		envs['PAAS_PROD_ORG'] = variables['PAAS_PROD_ORG'] ?: 'pcfdev-org'
+		envs['PAAS_PROD_SPACE'] = variables['PAAS_PROD_SPACE'] ?: 'pfcdev-prod'
+		envs['PASS_HOSTNAME_UUID'] = variables['PASS_HOSTNAME_UUID'] ?: ''
 		envs['M2_SETTINGS_REPO_ID'] = variables['M2_SETTINGS_REPO_ID'] ?: 'artifactory-local'
-		envs['REPO_WITH_JARS'] = variables['REPO_WITH_JARS'] ?: 'http://artifactory:8081/artifactory/libs-release-local'
+		envs['REPO_WITH_BINARIES'] = variables['REPO_WITH_BINARIES'] ?: 'http://artifactory:8081/artifactory/libs-release-local'
 		envs['APP_MEMORY_LIMIT'] = variables['APP_MEMORY_LIMIT'] ?: '256m'
 		envs['JAVA_BUILDPACK_URL'] = variables['JAVA_BUILDPACK_URL'] ?: 'https://github.com/cloudfoundry/java-buildpack.git#v3.8.1'
 		return envs

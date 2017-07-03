@@ -39,17 +39,17 @@ pipeline {
 						versionPrefix: '1.0.0.M1-'
 					)
 
-					withCredentials([usernamePassword(credentialsId: env.CF_TEST_CREDENTIAL_ID, passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-						env.CF_TEST_USERNAME = USER
-						env.CF_TEST_PASSWORD = PASS
+					withCredentials([usernamePassword(credentialsId: env.PAAS_TEST_CREDENTIAL_ID, passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+						env.PAAS_TEST_USERNAME = USER
+						env.PAAS_TEST_PASSWORD = PASS
 					}
 
-					withCredentials([usernamePassword(credentialsId: env.CF_STAGE_CREDENTIAL_ID, passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+					withCredentials([usernamePassword(credentialsId: env.PAAS_STAGE_CREDENTIAL_ID, passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 						env.CF_STAGE_USERNAME = USER
 						env.CF_STAGE_PASSWORD = PASS
 					}
 
-					withCredentials([usernamePassword(credentialsId: env.CF_PROD_CREDENTIAL_ID, passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+					withCredentials([usernamePassword(credentialsId: env.PAAS_PROD_CREDENTIAL_ID, passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 						env.CF_PROD_USERNAME = USER
 						env.CF_PROD_PASSWORD = PASS
 					}
