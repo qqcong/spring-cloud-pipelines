@@ -289,7 +289,7 @@ function deployStubRunnerBoot() {
     fi
     echo "Deploying Stub Runner. Options - redeploy [${redeploy}], jar name [${jarName}], app name [${stubRunnerName}]"
     if [[ ${fileExists} == "false" || ( ${fileExists} == "true" && ${redeploy} == "true" ) ]]; then
-         "${stubRunnerName}" "${jarName}" "${env}" "false"
+        deployAppWithName "${stubRunnerName}" "${jarName}" "${env}" "false"
         local prop="$( retrieveStubRunnerIds )"
         echo "Found following stub runner ids [${prop}]"
         setEnvVar "${stubRunnerName}" "stubrunner.ids" "${prop}"
