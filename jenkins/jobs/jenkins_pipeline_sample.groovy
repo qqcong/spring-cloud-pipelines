@@ -29,6 +29,9 @@ boolean autoProd = binding.variables["AUTO_DEPLOY_TO_PROD"] == null ? false : Bo
 boolean rollbackStep = binding.variables["ROLLBACK_STEP_REQUIRED"] == null ? true : Boolean.parseBoolean(binding.variables["ROLLBACK_STEP_REQUIRED"])
 boolean stageStep = binding.variables["DEPLOY_TO_STAGE_STEP_REQUIRED"] == null ? true : Boolean.parseBoolean(binding.variables["DEPLOY_TO_STAGE_STEP_REQUIRED"])
 String scriptsDir = binding.variables["SCRIPTS_DIR"] ?: "${WORKSPACE}/common/src/main/bash"
+String toolsRepo = binding.variables["TOOLS_REPO"] ?: "https://github.com/spring-cloud/spring-cloud-pipelines"
+String toolsBranch = binding.variables["TOOLS_BRANCH"] ?: "master"
+
 
 // we're parsing the REPOS parameter to retrieve list of repos to build
 String repos = binding.variables["REPOS"] ?:
@@ -94,11 +97,11 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		set -e
-
-		${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh')}
-		${dsl.readFileFromWorkspace(scriptsDir + '/build_and_upload.sh')}
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
 		""")
+			shell('''#!/bin/bash 
+		${WORKSPACE}@tools/common/src/main/bash/build_and_upload.sh
+		''')
 		}
 		publishers {
 			archiveJunit(testReports)
@@ -158,11 +161,11 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		set -e
-
-		${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh')}
-		${dsl.readFileFromWorkspace(scriptsDir + '/build_api_compatibility_check.sh')}
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
 		""")
+			shell('''#!/bin/bash
+		${WORKSPACE}@tools/common/src/main/bash/build_api_compatibility_check.sh
+		''')
 		}
 		publishers {
 			archiveJunit(testReports) {
@@ -210,11 +213,11 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		set -e
-
-		${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh')}
-		${dsl.readFileFromWorkspace(scriptsDir + '/test_deploy.sh')}
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
 		""")
+			shell('''#!/bin/bash
+		${WORKSPACE}@tools/common/src/main/bash/test_deploy.sh
+		''')
 		}
 		publishers {
 			downstreamParameterized {
@@ -264,11 +267,11 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		set -e
-
-		${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh')}
-		${dsl.readFileFromWorkspace(scriptsDir + '/test_smoke.sh')}
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
 		""")
+			shell('''#!/bin/bash
+		${WORKSPACE}@tools/common/src/main/bash/test_smoke.sh
+		''')
 		}
 		publishers {
 			archiveJunit(testReports)
@@ -327,11 +330,11 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		set -e
-
-		${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh')}
-		${dsl.readFileFromWorkspace(scriptsDir + '/test_rollback_deploy.sh')}
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
 		""")
+				shell('''#!/bin/bash
+		${WORKSPACE}@tools/common/src/main/bash/test_rollback_deploy.sh
+		''')
 			}
 			publishers {
 				downstreamParameterized {
@@ -384,11 +387,11 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-		set -e
-
-		${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh')}
-		${dsl.readFileFromWorkspace(scriptsDir + '/test_rollback_smoke.sh')}
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
 		""")
+				shell('''#!/bin/bash
+		${WORKSPACE}@tools/common/src/main/bash/test_rollback_smoke.sh
+		''')
 			}
 			publishers {
 				archiveJunit(testReports) {
@@ -466,11 +469,11 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-			set -e
-
-			${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh')}
-			${dsl.readFileFromWorkspace(scriptsDir + '/stage_deploy.sh')}
-			""")
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		""")
+				shell('''#!/bin/bash
+		${WORKSPACE}@tools/common/src/main/bash/stage_deploy.sh
+		''')
 			}
 			publishers {
 				if (autoStage) {
@@ -529,11 +532,11 @@ parsedRepos.each {
 			}
 			steps {
 				shell("""#!/bin/bash
-			set -e
-
-			${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh')}
-			${dsl.readFileFromWorkspace(scriptsDir + '/stage_e2e.sh')}
-			""")
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
+		""")
+				shell('''#!/bin/bash
+		${WORKSPACE}@tools/common/src/main/bash/stage_e2e.sh
+		''')
 			}
 			publishers {
 				archiveJunit(testReports)
@@ -598,11 +601,11 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-		set -e
-
-		${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh')}
-		${dsl.readFileFromWorkspace(scriptsDir + '/prod_deploy.sh')}
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
 		""")
+			shell('''#!/bin/bash
+		${WORKSPACE}@tools/common/src/main/bash/prod_deploy.sh
+		''')
 		}
 		publishers {
 			buildPipelineTrigger("${projectName}-prod-env-complete") {
@@ -655,11 +658,11 @@ parsedRepos.each {
 		}
 		steps {
 			shell("""#!/bin/bash
-			set - e
-
-			${dsl.readFileFromWorkspace(scriptsDir + '/pipeline.sh') }
-			${dsl.readFileFromWorkspace(scriptsDir + '/prod_complete.sh') }
+		git clone -b ${toolsBranch} --single-branch ${toolsRepo} tools 
 		""")
+			shell('''#!/bin/bash
+		${WORKSPACE}@tools/common/src/main/bash/prod_complete.sh
+		''')
 		}
 	}
 }
