@@ -134,7 +134,7 @@ function deployRabbitMq() {
         (cf cs cloudamqp lemur "${serviceName}" && echo "Started RabbitMQ") ||
         (cf cs p-rabbitmq standard "${serviceName}" && echo "Started RabbitMQ for PCF Dev")
     else
-        echo "Service [${foundApp}] already started"
+        echo "Service [${serviceName}] already started"
     fi
 }
 
@@ -152,7 +152,7 @@ function deployMySql() {
         (cf cs p-mysql 100mb "${serviceName}" && echo "Started MySQL") ||
         (cf cs p-mysql 512mb "${serviceName}" && echo "Started MySQL for PCF Dev")
     else
-        echo "Service [${foundName}] already started"
+        echo "Service [${serviceName}] already started"
     fi
 }
 
