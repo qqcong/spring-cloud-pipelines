@@ -75,9 +75,7 @@ parsedRepos.each {
 		}
 		definition {
 			cps {
-				script("""
-					${dsl.readFileFromWorkspace(jenkinsfileDir + '/Jenkinsfile-sample')}
-				""")
+				script("""${dsl.readFileFromWorkspace(jenkinsfileDir + '/Jenkinsfile-sample')}""")
 			}
 		}
 	}
