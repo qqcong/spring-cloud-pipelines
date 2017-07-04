@@ -22,7 +22,7 @@ pipeline {
 				checkout([
 					$class: 'GitSCM',
 					branches: [
-						[name: env.TOOLS_BRANCH]
+						[name: "*/${env.TOOLS_BRANCH}"]
 					],
 					extensions: [
 						[$class: 'WipeWorkspace'],
