@@ -49,9 +49,3 @@ lowerCaseProjectType=$( echo "${PROJECT_TYPE}" | tr '[:upper:]' '[:lower:]' )
 __DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     [[ -f "${__DIR}/pipeline-${lowerCaseProjectType}.sh" ]] && source "${__DIR}/pipeline-${lowerCaseProjectType}.sh" || \
         echo "No pipeline-${lowerCaseProjectType}.sh found"
-
-export OUTPUT_FOLDER=$( outputFolder )
-export TEST_REPORTS_FOLDER=$( testResultsAntPattern )
-
-echo "Output folder [${OUTPUT_FOLDER}]"
-echo "Test reports folder [${TEST_REPORTS_FOLDER}]"

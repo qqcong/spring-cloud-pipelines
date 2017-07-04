@@ -109,3 +109,9 @@ echo "Current environment is [${ENVIRONMENT}]"
 
 [[ -f "${__DIR}/pipeline-${PAAS_TYPE}.sh" ]] && source "${__DIR}/pipeline-${PAAS_TYPE}.sh" || \
     echo "No pipeline-${PAAS_TYPE}.sh found"
+
+export OUTPUT_FOLDER=$( outputFolder )
+export TEST_REPORTS_FOLDER=$( testResultsAntPattern )
+
+echo "Output folder [${OUTPUT_FOLDER}]"
+echo "Test reports folder [${TEST_REPORTS_FOLDER}]"
