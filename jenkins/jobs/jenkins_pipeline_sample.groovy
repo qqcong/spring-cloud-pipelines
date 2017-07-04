@@ -23,6 +23,7 @@ boolean autoProd = binding.variables["AUTO_DEPLOY_TO_PROD"] == null ? false : Bo
 boolean rollbackStep = binding.variables["ROLLBACK_STEP_REQUIRED"] == null ? true : Boolean.parseBoolean(binding.variables["ROLLBACK_STEP_REQUIRED"])
 boolean stageStep = binding.variables["DEPLOY_TO_STAGE_STEP_REQUIRED"] == null ? true : Boolean.parseBoolean(binding.variables["DEPLOY_TO_STAGE_STEP_REQUIRED"])
 String scriptsDir = binding.variables["SCRIPTS_DIR"] ?: "${WORKSPACE}/common/src/main/bash"
+// TODO: Automate customization of this value
 String toolsRepo = binding.variables["TOOLS_REPO"] ?: "https://github.com/spring-cloud/spring-cloud-pipelines"
 String toolsBranch = binding.variables["TOOLS_BRANCH"] ?: "master"
 
@@ -299,7 +300,6 @@ parsedRepos.each {
 				parameters(PipelineDefaults.defaultParams())
 				environmentVariables {
 					environmentVariables(defaults.defaultEnvVars)
-					groovy(PipelineDefaults.groovyEnvScript)
 				}
 				credentialsBinding {
 					usernamePassword('PAAS_TEST_USERNAME', 'PAAS_TEST_PASSWORD', cfTestCredentialId)
@@ -349,7 +349,6 @@ parsedRepos.each {
 				parameters PipelineDefaults.smokeTestParams()
 				environmentVariables {
 					environmentVariables(defaults.defaultEnvVars)
-					groovy(PipelineDefaults.groovyEnvScript)
 				}
 				credentialsBinding {
 					usernamePassword('PAAS_TEST_USERNAME', 'PAAS_TEST_PASSWORD', cfTestCredentialId)
@@ -437,7 +436,6 @@ parsedRepos.each {
 				parameters(PipelineDefaults.defaultParams())
 				environmentVariables {
 					environmentVariables(defaults.defaultEnvVars)
-					groovy(PipelineDefaults.groovyEnvScript)
 				}
 				credentialsBinding {
 					usernamePassword('CF_STAGE_USERNAME', 'CF_STAGE_PASSWORD', cfStageCredentialId)
@@ -495,7 +493,6 @@ parsedRepos.each {
 				parameters PipelineDefaults.smokeTestParams()
 				environmentVariables {
 					environmentVariables(defaults.defaultEnvVars)
-					groovy(PipelineDefaults.groovyEnvScript)
 				}
 				credentialsBinding {
 					usernamePassword('CF_STAGE_USERNAME', 'CF_STAGE_PASSWORD', cfStageCredentialId)
