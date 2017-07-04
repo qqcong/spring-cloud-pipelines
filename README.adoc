@@ -521,10 +521,10 @@ If `fly` is properly installed then it should print out the version.
 
   - `app-url` - url pointing to your forked `github-webhook` repo
   - `github-private-key` - your private key to clone / tag GitHub repos
-  - `repo-with-jars` - the IP is set to the defaults for Docker Machine. You should update it to point to your setup
+  - `repo-with-binaries` - the IP is set to the defaults for Docker Machine. You should update it to point to your setup
 
 If you don't have a Docker Machine just execute `./whats_my_ip.sh` script to
-get an external IP that you can pass to your `repo-with-jars` instead of the default
+get an external IP that you can pass to your `repo-with-binaries` instead of the default
 Docker Machine IP.
 
 Below you can see what environment variables are required by the scripts. To the right hand side you can see the default values for PCF Dev that we set in the `credentials-sample.yml`.
@@ -1190,7 +1190,7 @@ In your scripts we reference the credentials via IDs. These are the defaults for
 |======================
 |Property Name  | Property Description | Default value
 |GIT_CREDENTIAL_ID    | Credential ID used to tag a git repo | git
-|REPO_WITH_BINARIES_CREDENTIALS_ID    | Credential ID used for the repo with jars | repo-with-jars
+|REPO_WITH_BINARIES_CREDENTIALS_ID    | Credential ID used for the repo with jars | repo-with-binaries
 |CF_TEST_CREDENTIAL_ID  | Credential ID for CF Test env access | cf-test
 |CF_STAGE_CREDENTIAL_ID   | Credential ID for CF Stage env access | cf-stage
 |CF_PROD_CREDENTIAL_ID | Credential ID for CF Prod env access | cf-prod

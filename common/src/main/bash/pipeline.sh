@@ -75,13 +75,13 @@ function projectType() {
 
 function outputFolder() {
     echo "Returns the folder where the built binary will be stored.
-    Example: target/ - for Maven, build/ - for Gradle etc."
+    Example: 'target/' - for Maven, 'build/' - for Gradle etc."
     exit 1
 }
 
 function testResultsAntPattern() {
     echo "Returns the ant pattern for the test results.
-    Example: [**/test-results/*.xml] - for Maven, [**/surefire-reports/*] - for Gradle etc."
+    Example: '**/test-results/*.xml' - for Maven, '**/surefire-reports/*' - for Gradle etc."
     exit 1
 }
 
@@ -101,21 +101,11 @@ function extractVersionFromProdTag() {
 
 __DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# TODO: This will be parametrized
 # CURRENTLY WE ONLY SUPPORT CF AS PAAS OUT OF THE BOX
-[[ -f "${__DIR}/pipeline-cf.sh" ]] && source "${__DIR}/pipeline-cf.sh" || \
-    echo "No pipeline-cf.sh found"
+export PAAS_TYPE="${PAAS_TYPE:-cf}"
 
-# TODO: This will be parametrized
-# CURRENTLY WE ONLY SUPPORT JVM APPS OUT OF THE BOX
-[[ -f "${__DIR}/pipeline-jvm.sh" ]] && source "${__DIR}/pipeline-jvm.sh" || \
-    echo "No pipeline-jvm.sh found"
+echo "Picked PAAS is [${PAAS_TYPE}]"
+echo "Current environment is [${ENVIRONMENT}]"
 
-
-export PROJECT_TYPE=$( projectType )
-export OUTPUT_FOLDER=$( outputFolder )
-export TEST_REPORTS_FOLDER=$( testResultsAntPattern )
-
-echo "Project type [${PROJECT_TYPE}]"
-echo "Output folder [${OUTPUT_FOLDER}]"
-echo "Test reports folder [${TEST_REPORTS_FOLDER}]"
+[[ -f "${__DIR}/pipeline-${PAAS_TYPE}.sh" ]] && source "${__DIR}/pipeline-${PAAS_TYPE}.sh" || \
+    echo "No pipeline-${PAAS_TYPE}.sh found"

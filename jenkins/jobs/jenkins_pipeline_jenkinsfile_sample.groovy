@@ -26,7 +26,7 @@ envs['PAAS_PROD_ORG'] = binding.variables['PAAS_PROD_ORG'] ?: 'pcfdev-org'
 envs['PAAS_PROD_SPACE'] = binding.variables['PAAS_PROD_SPACE'] ?: 'pfcdev-prod'
 envs['PAAS_HOSTNAME_UUID'] = binding.variables['PAAS_HOSTNAME_UUID'] ?: ''
 envs['M2_SETTINGS_REPO_ID'] = binding.variables['M2_SETTINGS_REPO_ID'] ?: 'artifactory-local'
-envs['REPO_WITH_BINARIES_CREDENTIALS_ID'] = binding.variables['REPO_WITH_BINARIES_CREDENTIALS_ID'] ?: 'repo-with-jars'
+envs['REPO_WITH_BINARIES_CREDENTIALS_ID'] = binding.variables['REPO_WITH_BINARIES_CREDENTIALS_ID'] ?: 'repo-with-binaries'
 envs['REPO_WITH_BINARIES'] = binding.variables['REPO_WITH_BINARIES'] ?: 'http://artifactory:8081/artifactory/libs-release-local'
 envs['GIT_CREDENTIAL_ID'] = gitCredentials 
 envs['JDK_VERSION'] = binding.variables["JDK_VERSION"] ?: "jdk8"
@@ -39,6 +39,7 @@ envs['PAAS_STAGE_CREDENTIAL_ID'] = binding.variables["PAAS_STAGE_CREDENTIAL_ID"]
 envs['PAAS_PROD_CREDENTIAL_ID'] = binding.variables["PAAS_PROD_CREDENTIAL_ID"] ?: "cf-prod"
 envs['APP_MEMORY_LIMIT'] = binding.variables["APP_MEMORY_LIMIT"] ?: "256m"
 envs['JAVA_BUILDPACK_URL'] = binding.variables["JAVA_BUILDPACK_URL"] ?: 'https://github.com/cloudfoundry/java-buildpack.git#v3.8.1'
+envs['PAAS_TYPE'] = binding.variables["PAAS_TYPE"] ?: 'cf'
 
 parsedRepos.each {
 	List<String> parsedEntry = it.split('\\$')

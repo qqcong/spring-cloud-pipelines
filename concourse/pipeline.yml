@@ -67,10 +67,11 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}
       - put: repo
         params:
           repository: out
@@ -107,10 +108,11 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}
 
   - name: test-deploy
     serial: true
@@ -142,16 +144,17 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
-          - PAAS_TEST_USERNAME: {{cf-test-username}}
-          - PAAS_TEST_PASSWORD: {{cf-test-password}}
-          - PAAS_TEST_ORG: {{cf-test-org}}
-          - PAAS_TEST_SPACE: {{cf-test-space}}
-          - PAAS_TEST_API_URL: {{cf-test-api-url}}
-          - PAAS_HOSTNAME_UUID: {{cf-hostname-uuid}}
+          - PAAS_TEST_USERNAME: {{paas-test-username}}
+          - PAAS_TEST_PASSWORD: {{paas-test-password}}
+          - PAAS_TEST_ORG: {{paas-test-org}}
+          - PAAS_TEST_SPACE: {{paas-test-space}}
+          - PAAS_TEST_API_URL: {{paas-test-api-url}}
+          - PAAS_HOSTNAME_UUID: {{paas-hostname-uuid}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}
 
   - name: test-smoke
     serial: true
@@ -183,15 +186,16 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
-          - PAAS_TEST_USERNAME: {{cf-test-username}}
-          - PAAS_TEST_PASSWORD: {{cf-test-password}}
-          - PAAS_TEST_ORG: {{cf-test-org}}
-          - PAAS_TEST_SPACE: {{cf-test-space}}
-          - PAAS_TEST_API_URL: {{cf-test-api-url}}
+          - PAAS_TEST_USERNAME: {{paas-test-username}}
+          - PAAS_TEST_PASSWORD: {{paas-test-password}}
+          - PAAS_TEST_ORG: {{paas-test-org}}
+          - PAAS_TEST_SPACE: {{paas-test-space}}
+          - PAAS_TEST_API_URL: {{paas-test-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}
 
   - name: test-rollback-deploy
     serial: true
@@ -223,15 +227,16 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
-          - PAAS_TEST_USERNAME: {{cf-test-username}}
-          - PAAS_TEST_PASSWORD: {{cf-test-password}}
-          - PAAS_TEST_ORG: {{cf-test-org}}
-          - PAAS_TEST_SPACE: {{cf-test-space}}
-          - PAAS_TEST_API_URL: {{cf-test-api-url}}
+          - PAAS_TEST_USERNAME: {{paas-test-username}}
+          - PAAS_TEST_PASSWORD: {{paas-test-password}}
+          - PAAS_TEST_ORG: {{paas-test-org}}
+          - PAAS_TEST_SPACE: {{paas-test-space}}
+          - PAAS_TEST_API_URL: {{paas-test-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}
 
   - name: test-rollback-smoke
     serial: true
@@ -263,15 +268,16 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
-          - PAAS_TEST_USERNAME: {{cf-test-username}}
-          - PAAS_TEST_PASSWORD: {{cf-test-password}}
-          - PAAS_TEST_ORG: {{cf-test-org}}
-          - PAAS_TEST_SPACE: {{cf-test-space}}
-          - PAAS_TEST_API_URL: {{cf-test-api-url}}
+          - PAAS_TEST_USERNAME: {{paas-test-username}}
+          - PAAS_TEST_PASSWORD: {{paas-test-password}}
+          - PAAS_TEST_ORG: {{paas-test-org}}
+          - PAAS_TEST_SPACE: {{paas-test-space}}
+          - PAAS_TEST_API_URL: {{paas-test-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}
 
   - name: stage-deploy
     serial: true
@@ -303,16 +309,17 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
-          - CF_STAGE_USERNAME: {{cf-stage-username}}
-          - CF_STAGE_PASSWORD: {{cf-stage-password}}
-          - PAAS_STAGE_ORG: {{cf-stage-org}}
-          - PAAS_STAGE_SPACE: {{cf-stage-space}}
-          - PAAS_STAGE_API_URL: {{cf-stage-api-url}}
-          - PAAS_HOSTNAME_UUID: {{cf-hostname-uuid}}
+          - PAAS_STAGE_USERNAME: {{paas-stage-username}}
+          - PAAS_STAGE_PASSWORD: {{paas-stage-password}}
+          - PAAS_STAGE_ORG: {{paas-stage-org}}
+          - PAAS_STAGE_SPACE: {{paas-stage-space}}
+          - PAAS_STAGE_API_URL: {{paas-stage-api-url}}
+          - PAAS_HOSTNAME_UUID: {{paas-hostname-uuid}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}
 
   - name: stage-e2e
     serial: true
@@ -344,15 +351,16 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
-          - CF_STAGE_USERNAME: {{cf-stage-username}}
-          - CF_STAGE_PASSWORD: {{cf-stage-password}}
-          - PAAS_STAGE_ORG: {{cf-stage-org}}
-          - PAAS_STAGE_SPACE: {{cf-stage-space}}
-          - PAAS_STAGE_API_URL: {{cf-stage-api-url}}
+          - PAAS_STAGE_USERNAME: {{paas-stage-username}}
+          - PAAS_STAGE_PASSWORD: {{paas-stage-password}}
+          - PAAS_STAGE_ORG: {{paas-stage-org}}
+          - PAAS_STAGE_SPACE: {{paas-stage-space}}
+          - PAAS_STAGE_API_URL: {{paas-stage-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}
 
   - name: prod-deploy
     serial: true
@@ -384,16 +392,17 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
-          - CF_PROD_USERNAME: {{cf-prod-username}}
-          - CF_PROD_PASSWORD: {{cf-prod-password}}
-          - PAAS_PROD_ORG: {{cf-prod-org}}
-          - PAAS_PROD_SPACE: {{cf-prod-space}}
-          - PAAS_PROD_API_URL: {{cf-prod-api-url}}
-          - PAAS_HOSTNAME_UUID: {{cf-hostname-uuid}}
+          - PAAS_PROD_USERNAME: {{paas-prod-username}}
+          - PAAS_PROD_PASSWORD: {{paas-prod-password}}
+          - PAAS_PROD_ORG: {{paas-prod-org}}
+          - PAAS_PROD_SPACE: {{paas-prod-space}}
+          - PAAS_PROD_API_URL: {{paas-prod-api-url}}
+          - PAAS_HOSTNAME_UUID: {{paas-hostname-uuid}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}
       - put: repo
         params:
           repository: out
@@ -430,12 +439,13 @@ jobs:
           - M2_SETTINGS_REPO_ID: {{m2-settings-repo-id}}
           - M2_SETTINGS_REPO_USERNAME: {{m2-settings-repo-username}}
           - M2_SETTINGS_REPO_PASSWORD: {{m2-settings-repo-password}}
-          - REPO_WITH_BINARIES: {{repo-with-jars}}
+          - REPO_WITH_BINARIES: {{repo-with-binaries}}
           - M2_REPO: {{maven-local-dir}}
-          - CF_PROD_USERNAME: {{cf-prod-username}}
-          - CF_PROD_PASSWORD: {{cf-prod-password}}
-          - PAAS_PROD_ORG: {{cf-prod-org}}
-          - PAAS_PROD_SPACE: {{cf-prod-space}}
-          - PAAS_PROD_API_URL: {{cf-prod-api-url}}
+          - PAAS_PROD_USERNAME: {{paas-prod-username}}
+          - PAAS_PROD_PASSWORD: {{paas-prod-password}}
+          - PAAS_PROD_ORG: {{paas-prod-org}}
+          - PAAS_PROD_SPACE: {{paas-prod-space}}
+          - PAAS_PROD_API_URL: {{paas-prod-api-url}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
+          - PAAS_TYPE: {{paas-type}}

@@ -11,7 +11,7 @@ String pipelineVersion = binding.variables["PIPELINE_VERSION"] ?: '''1.0.0.M1-${
 String cronValue = "H H * * 7" //every Sunday - I guess you should run it more often ;)
 String testReports = ["**/surefire-reports/*.xml", "**/test-results/**/*.xml"].join(",")
 String gitCredentials = binding.variables["GIT_CREDENTIAL_ID"] ?: "git"
-String repoWithBinariesCredentials = binding.variables["REPO_WITH_BINARIES_CREDENTIALS_ID"] ?: "repo-with-jars"
+String repoWithBinariesCredentials = binding.variables["REPO_WITH_BINARIES_CREDENTIALS_ID"] ?: "repo-with-binaries"
 String jdkVersion = binding.variables["JDK_VERSION"] ?: "jdk8"
 String cfTestCredentialId = binding.variables["PAAS_TEST_CREDENTIAL_ID"] ?: "cf-test"
 String cfStageCredentialId = binding.variables["PAAS_STAGE_CREDENTIAL_ID"] ?: "cf-stage"
@@ -56,7 +56,6 @@ parsedRepos.each {
 			deliveryPipelineVersion(pipelineVersion, true)
 			environmentVariables {
 				environmentVariables(defaults.defaultEnvVars)
-				groovy(PipelineDefaults.groovyEnvScript)
 			}
 			parameters(PipelineDefaults.defaultParams())
 			timestamps()
@@ -130,7 +129,6 @@ parsedRepos.each {
 			deliveryPipelineVersion('${ENV,var="PIPELINE_VERSION"}', true)
 			environmentVariables {
 				environmentVariables(defaults.defaultEnvVars)
-				groovy(PipelineDefaults.groovyEnvScript)
 			}
 			parameters(PipelineDefaults.defaultParams())
 			timestamps()
@@ -186,7 +184,6 @@ parsedRepos.each {
 			parameters(PipelineDefaults.defaultParams())
 			environmentVariables {
 				environmentVariables(defaults.defaultEnvVars)
-				groovy(PipelineDefaults.groovyEnvScript)
 			}
 			credentialsBinding {
 				usernamePassword('PAAS_TEST_USERNAME', 'PAAS_TEST_PASSWORD', cfTestCredentialId)
@@ -220,7 +217,7 @@ parsedRepos.each {
 			downstreamParameterized {
 				trigger("${projectName}-test-env-test") {
 					parameters {
-						propertiesFile('target/test.properties,build/libs/test.properties', false)
+						
 						currentBuild()
 					}
 					triggerWithNoParameters()
@@ -237,7 +234,6 @@ parsedRepos.each {
 			parameters PipelineDefaults.smokeTestParams()
 			environmentVariables {
 				environmentVariables(defaults.defaultEnvVars)
-				groovy(PipelineDefaults.groovyEnvScript)
 			}
 			credentialsBinding {
 				usernamePassword('PAAS_TEST_USERNAME', 'PAAS_TEST_PASSWORD', cfTestCredentialId)
@@ -338,7 +334,6 @@ parsedRepos.each {
 					trigger("${projectName}-test-env-rollback-test") {
 						triggerWithNoParameters()
 						parameters {
-							propertiesFile('target/test.properties,build/libs/test.properties', false)
 							currentBuild()
 						}
 					}
@@ -479,7 +474,6 @@ parsedRepos.each {
 							triggerWithNoParameters()
 							parameters {
 								currentBuild()
-								propertiesFile('target/test.properties,build/libs/test.properties', false)
 							}
 						}
 					}
@@ -487,7 +481,6 @@ parsedRepos.each {
 					buildPipelineTrigger("${projectName}-stage-env-test") {
 						parameters {
 							currentBuild()
-							propertiesFile('target/test.properties,build/libs/test.properties', false)
 						}
 					}
 				}
@@ -565,7 +558,6 @@ parsedRepos.each {
 			parameters(PipelineDefaults.defaultParams())
 			environmentVariables {
 				environmentVariables(defaults.defaultEnvVars)
-				groovy(PipelineDefaults.groovyEnvScript)
 			}
 			credentialsBinding {
 				usernamePassword('CF_PROD_USERNAME', 'CF_PROD_PASSWORD', cfProdCredentialId)
@@ -629,7 +621,6 @@ parsedRepos.each {
 			parameters(PipelineDefaults.defaultParams())
 			environmentVariables {
 				environmentVariables(defaults.defaultEnvVars)
-				groovy(PipelineDefaults.groovyEnvScript)
 			}
 			credentialsBinding {
 				usernamePassword('CF_PROD_USERNAME', 'CF_PROD_PASSWORD', cfProdCredentialId)
@@ -694,23 +685,9 @@ class PipelineDefaults {
 		envs['REPO_WITH_BINARIES'] = variables['REPO_WITH_BINARIES'] ?: 'http://artifactory:8081/artifactory/libs-release-local'
 		envs['APP_MEMORY_LIMIT'] = variables['APP_MEMORY_LIMIT'] ?: '256m'
 		envs['JAVA_BUILDPACK_URL'] = variables['JAVA_BUILDPACK_URL'] ?: 'https://github.com/cloudfoundry/java-buildpack.git#v3.8.1'
+		envs['PAAS_TYPE'] = variables['PAAS_TYPE'] ?: 'cf'
 		return envs
 	}
-
-	public static final String groovyEnvScript = '''
-String workspace = binding.variables['WORKSPACE']
-String mvn = "${workspace}/mvnw"
-String gradle =  "${workspace}/gradlew"
-
-Map envs = [:]
-if (new File(mvn).exists()) {
-	envs['PROJECT_TYPE'] = "MAVEN"
-	envs['OUTPUT_FOLDER'] = "target"
-} else if (new File(gradle).exists()) {
-	envs['PROJECT_TYPE'] = "GRADLE"
-	envs['OUTPUT_FOLDER'] = "build/libs"
-}
-return envs'''
 
 	protected static Closure context(@DelegatesTo(BuildParametersContext) Closure params) {
 		params.resolveStrategy = Closure.DELEGATE_FIRST

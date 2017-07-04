@@ -43,6 +43,7 @@ factory.job('jenkins-pipeline-seed') {
             booleanParam('AUTO_DEPLOY_TO_PROD', false, 'Should deployment to prod be automatic')
             booleanParam('ROLLBACK_STEP_REQUIRED', true, 'Should rollback step be present')
             booleanParam('DEPLOY_TO_STAGE_STEP_REQUIRED', true, 'Should deploy to stage step be present')
+            choiceParam('PAAS_TYPE', ['cf'], "Which PAAS do you want to choose")
         }
     }
     steps {

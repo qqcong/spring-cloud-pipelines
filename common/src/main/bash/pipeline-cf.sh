@@ -479,6 +479,6 @@ function propagatePropertiesForTests() {
 
 __DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# CURRENTLY WE ONLY SUPPORT CF AS PAAS OUT OF THE BOX
-[[ -f "${__DIR}/pipeline-jvm.sh" ]] && source "${__DIR}/pipeline-jvm.sh" || \
-    echo "No pipeline-jvm.sh found"
+# CURRENTLY WE ONLY SUPPORT JVM BASED PROJECTS OUT OF THE BOX
+[[ -f "${__DIR}/projectType/pipeline-jvm.sh" ]] && source "${__DIR}/projectType/pipeline-jvm.sh" || \
+    echo "No projectType/pipeline-jvm.sh found"
