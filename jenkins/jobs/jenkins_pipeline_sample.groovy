@@ -689,7 +689,7 @@ class PipelineDefaults {
 		envs['PAAS_STAGE_SPACE'] = variables['PAAS_STAGE_SPACE'] ?: 'pfcdev-stage'
 		envs['PAAS_PROD_ORG'] = variables['PAAS_PROD_ORG'] ?: 'pcfdev-org'
 		envs['PAAS_PROD_SPACE'] = variables['PAAS_PROD_SPACE'] ?: 'pfcdev-prod'
-		envs['PASS_HOSTNAME_UUID'] = variables['PASS_HOSTNAME_UUID'] ?: ''
+		envs['PAAS_HOSTNAME_UUID'] = variables['PAAS_HOSTNAME_UUID'] ?: ''
 		envs['M2_SETTINGS_REPO_ID'] = variables['M2_SETTINGS_REPO_ID'] ?: 'artifactory-local'
 		envs['REPO_WITH_BINARIES'] = variables['REPO_WITH_BINARIES'] ?: 'http://artifactory:8081/artifactory/libs-release-local'
 		envs['APP_MEMORY_LIMIT'] = variables['APP_MEMORY_LIMIT'] ?: '256m'

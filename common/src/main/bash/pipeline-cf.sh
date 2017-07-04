@@ -130,7 +130,7 @@ function deployRabbitMq() {
     echo "Waiting for RabbitMQ to start"
     local foundApp=`cf s | awk -v "app=${serviceName}" '$1 == app {print($0)}'`
     if [[ "${foundApp}" == "" ]]; then
-        hostname="${hostname}-${PASS_HOSTNAME_UUID}"
+        hostname="${hostname}-${PAAS_HOSTNAME_UUID}"
         (cf cs cloudamqp lemur "${serviceName}" && echo "Started RabbitMQ") ||
         (cf cs p-rabbitmq standard "${serviceName}" && echo "Started RabbitMQ for PCF Dev")
     else
@@ -148,7 +148,7 @@ function deployMySql() {
     echo "Waiting for MySQL to start"
     local foundApp=`cf s | awk -v "app=${serviceName}" '$1 == app {print($0)}'`
     if [[ "${foundApp}" == "" ]]; then
-        hostname="${hostname}-${PASS_HOSTNAME_UUID}"
+        hostname="${hostname}-${PAAS_HOSTNAME_UUID}"
         (cf cs p-mysql 100mb "${serviceName}" && echo "Started MySQL") ||
         (cf cs p-mysql 512mb "${serviceName}" && echo "Started MySQL for PCF Dev")
     else
@@ -205,8 +205,8 @@ function deployAppWithName() {
     local hostname="${lowerCaseAppName}"
     local memory="${APP_MEMORY_LIMIT:-256m}"
     local buildPackUrl="${JAVA_BUILDPACK_URL:-https://github.com/cloudfoundry/java-buildpack.git#v3.8.1}"
-    if [[ "${PASS_HOSTNAME_UUID}" != "" ]]; then
-        hostname="${hostname}-${PASS_HOSTNAME_UUID}"
+    if [[ "${PAAS_HOSTNAME_UUID}" != "" ]]; then
+        hostname="${hostname}-${PAAS_HOSTNAME_UUID}"
     fi
     if [[ ${env} != "PROD" ]]; then
         hostname="${hostname}-${env}"

@@ -149,7 +149,7 @@ jobs:
           - PAAS_TEST_ORG: {{cf-test-org}}
           - PAAS_TEST_SPACE: {{cf-test-space}}
           - PAAS_TEST_API_URL: {{cf-test-api-url}}
-          - PASS_HOSTNAME_UUID: {{cf-hostname-uuid}}
+          - PAAS_HOSTNAME_UUID: {{cf-hostname-uuid}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
 
@@ -310,7 +310,7 @@ jobs:
           - PAAS_STAGE_ORG: {{cf-stage-org}}
           - PAAS_STAGE_SPACE: {{cf-stage-space}}
           - PAAS_STAGE_API_URL: {{cf-stage-api-url}}
-          - PASS_HOSTNAME_UUID: {{cf-hostname-uuid}}
+          - PAAS_HOSTNAME_UUID: {{cf-hostname-uuid}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
 
@@ -391,7 +391,7 @@ jobs:
           - PAAS_PROD_ORG: {{cf-prod-org}}
           - PAAS_PROD_SPACE: {{cf-prod-space}}
           - PAAS_PROD_API_URL: {{cf-prod-api-url}}
-          - PASS_HOSTNAME_UUID: {{cf-hostname-uuid}}
+          - PAAS_HOSTNAME_UUID: {{cf-hostname-uuid}}
           - APP_MEMORY_LIMIT: {{app-memory-limit}}
           - BUILD_OPTIONS: {{build-options}}
       - put: repo

@@ -406,7 +406,7 @@ The env vars that are used in all of the jobs are as follows:
 |PIPELINE_VERSION | What should be the version of the pipeline (ultimately also version of the jar) | 1.0.0.M1-${GROOVY,script ="new Date().format('yyMMdd_HHmmss')"}-VERSION
 |GIT_EMAIL | The email used by Git to tag repo | email@example.com
 |GIT_NAME | The name used by Git to tag repo | Pivo Tal
-|PASS_HOSTNAME_UUID | Additional suffix for the route. In a shared environment the default routes can be already taken |
+|PAAS_HOSTNAME_UUID | Additional suffix for the route. In a shared environment the default routes can be already taken |
 |AUTO_DEPLOY_TO_STAGE | Should deployment to stage be automatic | false
 |AUTO_DEPLOY_TO_PROD | Should deployment to prod be automatic | false
 |ROLLBACK_STEP_REQUIRED | Should rollback step be present | true
