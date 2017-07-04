@@ -42,6 +42,7 @@ function projectType() {
     fi
 }
 
+export -f projectType
 export PROJECT_TYPE=$( projectType )
 echo "Project type [${PROJECT_TYPE}]"
 

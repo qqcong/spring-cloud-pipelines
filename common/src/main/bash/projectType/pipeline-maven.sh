@@ -107,3 +107,10 @@ function outputFolder() {
 function testResultsAntPattern() {
     echo "**/surefire-reports/*"
 }
+
+export -f build
+export -f apiCompatibilityCheck
+export -f runSmokeTests
+export -f runE2eTests
+export -f outputFolder
+export -f testResultsAntPattern
