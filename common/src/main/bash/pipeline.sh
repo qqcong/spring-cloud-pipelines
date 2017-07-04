@@ -1,5 +1,5 @@
 #!/bin/bash
-set -o errexit
+set -e
 
 # ---- BUILD PHASE ----
 function build() {

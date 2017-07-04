@@ -439,7 +439,7 @@ parsedRepos.each {
 					environmentVariables(defaults.defaultEnvVars)
 				}
 				credentialsBinding {
-					usernamePassword('CF_STAGE_USERNAME', 'CF_STAGE_PASSWORD', cfStageCredentialId)
+					usernamePassword('PAAS_STAGE_USERNAME', 'PAAS_STAGE_PASSWORD', cfStageCredentialId)
 				}
 				timestamps()
 				colorizeOutput()
@@ -496,7 +496,7 @@ parsedRepos.each {
 					environmentVariables(defaults.defaultEnvVars)
 				}
 				credentialsBinding {
-					usernamePassword('CF_STAGE_USERNAME', 'CF_STAGE_PASSWORD', cfStageCredentialId)
+					usernamePassword('PAAS_STAGE_USERNAME', 'PAAS_STAGE_PASSWORD', cfStageCredentialId)
 				}
 				timestamps()
 				colorizeOutput()
@@ -558,7 +558,7 @@ parsedRepos.each {
 				environmentVariables(defaults.defaultEnvVars)
 			}
 			credentialsBinding {
-				usernamePassword('CF_PROD_USERNAME', 'CF_PROD_PASSWORD', cfProdCredentialId)
+				usernamePassword('PAAS_PROD_USERNAME', 'PAAS_PROD_PASSWORD', cfProdCredentialId)
 			}
 			timestamps()
 			colorizeOutput()
@@ -621,7 +621,7 @@ parsedRepos.each {
 				environmentVariables(defaults.defaultEnvVars)
 			}
 			credentialsBinding {
-				usernamePassword('CF_PROD_USERNAME', 'CF_PROD_PASSWORD', cfProdCredentialId)
+				usernamePassword('PAAS_PROD_USERNAME', 'PAAS_PROD_PASSWORD', cfProdCredentialId)
 			}
 			timestamps()
 			colorizeOutput()
